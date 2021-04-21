@@ -14,7 +14,7 @@
        Style every button of the page to be bigger */
      #myTaskList {font-weight: bold;  border: 10px; font-size: larger;}
      #myTaskList {background-color: aqua; opacity: 0.4;}
-     input[type=button] {size: larger;}
+     input[type=button] {padding: 15px;}
 
     </style>
   <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;box-sizing: content-box;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
@@ -59,34 +59,68 @@
                 - Use document.getElementById to get the UL item and the input text
                 - Use the document.createElement to create the new List Item
                 - Append the child to the UL
-            */ let addNewTask = function {let list = document.getElementById("myTaskList")
-               let textBox = document.getElementById("newTask")
-                   let log = textBox.addEventListener('input', updateValue)
-                   
-    }
+            */ 
+           const list = document.getElementById("myTaskList")
+           
+            function addNewTask() {
+               
+               const newTask = document.getElementById("newTask")
+               
+               const newLi = document.createElement("li")
+               
+               newLi.innerHTML = newTask.value
+               list.appendChild(newLi)
+               }
               
                    
 
       /* EXERCISE 6: 
                 Create a method "removeLast" which removes the last item from the task list
-            */  let removeLast = function() { 
-                let x = document.getElementsById("myTaskList")
+            */  function removeLast() {
+                 list.children[list.children.length-1].remove()
+            }
 
                     
-            }
+            
 
       /* EXERCISE 7: 
                 Create a method "removeFirst" which removes the first item from the task list
-            */
+            */   function removeFirst() {
+              list.children[0].remove()}
 
       /* EXERCISE 8: 
                Create a method "getTasksAsArray" which returns, and prints to the console an array containing the tasks as string
             */
+               function getTasksAsArray(){
+                
+                let arrayOfTasks = []
+                for(let child of list.children) {
+                   arrayOfTasks.push(child.innerHTML)
+                 }
+                 console.log(arrayOfTasks)
+               }
+
+
+    
 
       /* EXERCISE 9:
-               Create a method "changeTaskBackgroundColor" which takes the color from the color picker with an 
+               Create a method "" which takes the color from the color picker with an 
                onchange event listener ad applies it as background to every list item
             */
+
+            function changeTaskBackgroundColor(){
+              const colorPicker = document.querySelector("#colorPicker")
+
+              for( let child of list.children) {
+               child.style.backgroundColor = colorPicker.value
+              }
+
+
+            }
+
+            window.onload = function() {
+              colorPicker.addEventListener("change", changeTaskBackgroundColor)
+            }
 
       /* EXTRA */
 
